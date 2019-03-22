@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
+<link rel="stylesheet" href="cgpa.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" ></script>
+<meta charset="UTF-8">
+<title>Login</title>
+<script>
+function scholar()
+{
+	var sca,sch;
+	var sca = document.getElementById("check");
+	if(document.getElementById("L50").checked){
+    sch = document.getElementById("L50").value;
+    } 
+	else if(document.getElementById("L80").checked){
+	sch = document.getElementById("L80").value;
+    }
+    else if(document.getElementById("L90").checked){
+    sch = document.getElementById("L90").value;
+    }
+	sca.value = sch;
+	console.log(sch);
+}
+function validate(){
+	var userName = document.getElementById("name").value;
+	var password = document.getElementById("batch").value;
+	var year     = document.getElementById("year").value;
+
+	if (userName === "") {
+		document.getElementById("print").innerHTML = "** Please fill the Name Field";
+		
+	}
+
+	if (password === "") {
+		document.getElementById("printa").innerHTML = "** Please fill the Department Field";
+		
+	}
+	if (year === "") {
+		document.getElementById("printb").innerHTML = "** Please fill the Year Field";
+		
+	}
+		
+	
+}
+
+window.onload = function() {
+	document.getElementById("studentForm").addEventListener("submit", function(e){
+    	validate();
+		
+		e.preventDefault();
+		
+	});
+}
+
+function addHTMLTableRow()
+		{
+			var table = document.getElementById("table"),
+				newRow = table.insertRow(table.length),
+				cell1 = newRow.insertCell(0),
+				cell2 = newRow.insertCell(1),
+				cell3 = newRow.insertCell(2),
+				cell4 = newRow.insertCell(3),
+				cell5 = newRow.insertCell(4),
+				cell6 = newRow.insertCell(5),
+				cell7 = newRow.insertCell(6),
+				name = document.getElementById("name").value,
+				batch = document.getElementById("batch").value;
+				year = document.getElementById("year").value;
+				acafe = document.getElementById("acafe").value;
+				tufe = document.getElementById("tufe").value;
+				check = document.getElementById("check").value;
+				A = acafe - tufe - check;
+				Fees = A.toFixed(2);
+			cell1.innerHTML = name;
+			cell2.innerHTML = batch;
+			cell3.innerHTML = year;
+			cell4.innerHTML = acafe;
+			cell5.innerHTML = tufe;
+			cell6.innerHTML = check;
+			cell7.innerHTML = Fees;
+			
+		}
+
+    	
+</script>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="col-md-8 m-auto">
+<div class="card border border-danger  m-2 mt-5 p-4">
+<p class="lead">DETAILS OF THE STUDENTS</p>
+<div class="card-content">
+
+<form  id="studentForm">
+<div class="form-group row">
+<label  class="col-sm-5 col-form-label label" for="amount">STUDENT NAME :</label>
+<div class="col-sm-7">
+		<input class="form-control field" type="text"  id="name" placeholder = "Enter your Name" size="10">
+			<span id="print" class="wrong"></span><br>
+			</div>
+			</div>
+<div class="form-group row">
+
+<label class="col-sm-5 col-form-label label" for="amount">ACADEMIC BATCH :</label>
+<div class="col-sm-7">
+		<input class="form-control field" type = "month"  id="batch" placeholder =  "Enter the batch">
+		<span id="printa" class="wrong"></span><br>
+		</div>
+		</div>
+<div class="form-group row">
+<label class="col-sm-5 col-form-label label" for="amount">YEAR :</label>
+<div class="col-sm-7">
+	  <input class="form-control field" type = "text"  id="year" placeholder =  "Enter the year">
+	  <span id="printb" class="wrong"></span>
+	  </div>
+</div>
+<div class="form-group row">
+<label  class="col-sm-5 col-form-label label" for="amount">ACADEMIC FEES :</label>
+<div class="col-sm-7">
+	  <input class="form-control field" type = "number" value="75000" readonly class="corner" id="acafe" placeholder =  "Total fees">
+	  </div>
+</div>
+<div class="form-group row">
+<label class="col-sm-5 col-form-label label" for="amount">TUITION FEES :</label>
+<div class="col-sm-7">
+	  <input class="form-control field" type = "number" value="20000" readonly class="corner" id="tufe" placeholder =  "Tuition fees">
+	  </div>
+</div>
+<div class="form-group row">
+<label  class="col-sm-5 col-form-label label" for="amount">SCHOLORSHIP AMOUNT </label>
+<div class="col-sm-7">
+<div id="cgpa" class="label">
+<input type="radio" name="radio" id="L50" value="4000" checked>CGPA < 50% <br>
+     <input type="radio" name="radio" id="L80" value="10000">CGPA > 50% and CGPA < 90% <br>
+     <input type="radio" name="radio" id="L90" value="25000">CGPA > 90% <br>
+     <br><br> 
+	  </div>
+	  <input type="button" class="btn btn-info"  onclick = "scholar();" value="REDUCED AMOUNT"></br></br>
+	  <input class="form-control field"  type = "number" id="check" readonly placeholder =  "Scholorship Amount">
+	 <div id="check">
+	 </div>
+	  </div>
+</div>
+	 <div class="d-flex justify-content-around">
+	<input class="btn btn-success" type="submit" id="button" value="Submit" onclick = "addHTMLTableRow();">
+	<input class="btn btn-danger" type="reset" value="Reset">
+	</div></br></br>
+	
+</form>
+</div>
+
+<table id="table" class="table table-hover table-condensed" align="center" border width="50%" border = "1">
+	<tr>
+		<th>NAME</th>
+		<th>BATCH</th>
+		<th>YEAR</th>
+		<th>ACADEMIC FEES</th>
+		<th>TUITION FEES</th>
+		<th>SCHOLORSHIP FEES</th>
+		<th>FINAL PAYABLE FEES</th>
+	</tr>
+	</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
